@@ -24,7 +24,7 @@ threading.Thread(target=run_health_check_server, daemon=True).start()
 
 
 # 🤖 2. YOUR ORIGINAL TELEGRAM BOT LOGIC
-BOT_TOKEN = "8863166130:AAEoBqFLz54gHfzeBuGIFUFx7GTHFUxKWnA"  # <-- Put your token back here!
+BOT_TOKEN = "8914403963:AAFWmcGtc4Tn449WuzP2EJT_AalzxzxkOpY"  # <-- Put your token back here!
 bot = telebot.TeleBot(BOT_TOKEN)
 
 DOWNLOAD_DIR = "downloads"
