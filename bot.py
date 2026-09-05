@@ -54,13 +54,17 @@ def welcome(message):
     )
 
 
-@bot.message_handler(func=lambda message: bool(message.text))
+@bot.message_handler(
+    func=lambda message: (
+        bool(message.text)
+        and message.text.strip().startswith(
+            ("http://", "https://")
+        )
+    )
+)
 def download_video(message):
     url = message.text.strip()
 
-    if not url.startswith(("http://", "https://")):
-        bot.reply_to(message, "❌ Please send a valid video URL.")
-        return
 
     status = bot.reply_to(message, "⏳ Processing your link...")
 
