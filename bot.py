@@ -171,7 +171,7 @@ def handle_download_choice(call):
 
             # Download video-only stream
             ydl_opts = {
-                "format": "bestvideo[ext=mp4]/best[ext=mp4]",
+                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]",
                 "outtmpl": "downloads/%(id)s.%(ext)s",
                 "noplaylist": True,
                 "quiet": True,
