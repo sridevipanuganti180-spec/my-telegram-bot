@@ -5,6 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import telebot
 from telebot import types
 import yt_dlp
+import imageio_ffmpeg
 
 
 # =========================
@@ -157,14 +158,14 @@ def handle_download_choice(call):
 
         if with_sound:
 
-            # Download best video + best audio
-            ydl_opts = {
-                "format": "bestvideo+bestaudio/best",
-                "outtmpl": "downloads/%(id)s.%(ext)s",
-                "merge_output_format": "mp4",
-                "noplaylist": True,
-                "quiet": True,
-            }
+    ydl_opts = {
+        "format": "bestvideo+bestaudio/best",
+        "outtmpl": "downloads/%(id)s.%(ext)s",
+        "merge_output_format": "mp4",
+        "ffmpeg_location": imageio_ffmpeg.get_ffmpeg_exe(),
+        "noplaylist": True,
+        "quiet": True,
+    }
 
         else:
 
