@@ -41,6 +41,15 @@ threading.Thread(
 # =========================
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_USERNAME = "@under100rploot"
+def is_user_joined(user_id):
+    try:
+        member = bot.get_chat_member(CHANNEL_USERNAME, user_id)
+
+        return member.status in ["member", "administrator", "creator"]
+
+    except Exception:
+        return False
 
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN is not configured")
@@ -53,11 +62,20 @@ user_urls = {}
 
 
 @bot.message_handler(commands=["start"])
-def start_command(message):
+def start(message):
+
+    if not is_user_joined(message.from_user.id):
+        bot.reply_to(
+            message,
+            "📢 Please join our channel first:\n"
+            "https://t.me/under100rploot\n\n"
+            "After joining, send /start again."
+        )
+        return
+
     bot.reply_to(
         message,
-        "👋 Welcome!\n\n"
-        "🔗 Send me a video URL and I'll download it for you."
+        "Welcome! 🎬\nSend me a video URL."
     )
 
 
