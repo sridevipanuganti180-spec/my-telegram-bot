@@ -92,7 +92,7 @@ def start(message):
         "Welcome! 🎬\nSend me a video URL."
     )
     @bot.callback_query_handler(func=lambda call: call.data == "check_join")
-def check_join(call):
+ def check_join(call):
 
     if is_user_joined(call.from_user.id):
         bot.answer_callback_query(
