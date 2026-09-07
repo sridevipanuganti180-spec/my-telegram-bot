@@ -64,11 +64,26 @@ user_urls = {}
 def start(message):
 
     if not is_user_joined(message.from_user.id):
-        bot.reply_to(
-            message,
-            "📢 Please join our channel first:\n"
-            "https://t.me/under100rploot\n\n"
-            "After joining, send /start again."
+
+        keyboard = types.InlineKeyboardMarkup()
+
+        join_button = types.InlineKeyboardButton(
+            "📢 Join Channel",
+            url="https://t.me/under100rploot"
+        )
+
+        check_button = types.InlineKeyboardButton(
+            "✅ I've Joined",
+            callback_data="check_join"
+        )
+
+        keyboard.add(join_button)
+        keyboard.add(check_button)
+
+        bot.send_message(
+            message.chat.id,
+            "📢 Please join our channel first to use the bot.",
+            reply_markup=keyboard
         )
         return
 
@@ -76,6 +91,26 @@ def start(message):
         message,
         "Welcome! 🎬\nSend me a video URL."
     )
+    @bot.callback_query_handler(func=lambda call: call.data == "check_join")
+def check_join(call):
+
+    if is_user_joined(call.from_user.id):
+        bot.answer_callback_query(
+            call.id,
+            "✅ You have joined!"
+        )
+
+        bot.send_message(
+            call.message.chat.id,
+            "Welcome! 🎬\nSend me a video URL."
+        )
+
+    else:
+        bot.answer_callback_query(
+            call.id,
+            "❌ You haven't joined yet.",
+            show_alert=True
+        )
 
 
 @bot.message_handler(commands=["help"])
