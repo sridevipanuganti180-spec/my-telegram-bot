@@ -45,9 +45,18 @@ def is_user_joined(user_id):
     try:
         member = bot.get_chat_member(CHANNEL_USERNAME, user_id)
 
-        return member.status in ["member", "administrator", "creator"]
+        print(
+            f"User {user_id} channel status: {member.status}"
+        )
 
-    except Exception:
+        return member.status in [
+            "member",
+            "administrator",
+            "creator"
+        ]
+
+    except Exception as e:
+        print(f"Membership check error: {e}")
         return False
 
 if not BOT_TOKEN:
