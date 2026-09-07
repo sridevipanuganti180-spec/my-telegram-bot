@@ -91,7 +91,7 @@ def start(message):
         message,
         "Welcome! 🎬\nSend me a video URL."
     )
-    @bot.callback_query_handler(func=lambda call: call.data == "check_join")
+ @bot.callback_query_handler(func=lambda call: call.data == "check_join")
  def check_join(call):
 
     if is_user_joined(call.from_user.id):
@@ -105,7 +105,7 @@ def start(message):
             "Welcome! 🎬\nSend me a video URL."
         )
 
-    else:
+     else:
         bot.answer_callback_query(
             call.id,
             "❌ You haven't joined yet.",
