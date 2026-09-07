@@ -121,6 +121,15 @@ def check_join(call):
             show_alert=True
         )
 
+@bot.message_handler(commands=["check"])
+def check_membership(message):
+    user_id = message.from_user.id
+
+    if is_user_joined(user_id):
+        bot.reply_to(message, "✅ You are a member of the channel.")
+    else:
+        bot.reply_to(message, "❌ You are NOT a member of the channel.")
+
 
 @bot.message_handler(commands=["help"])
 def help_command(message):
