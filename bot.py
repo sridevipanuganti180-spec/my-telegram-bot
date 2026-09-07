@@ -105,7 +105,7 @@ def check_join(call):
             "Welcome! 🎬\nSend me a video URL."
         )
 
-     else:
+    else:
         bot.answer_callback_query(
             call.id,
             "❌ You haven't joined yet.",
