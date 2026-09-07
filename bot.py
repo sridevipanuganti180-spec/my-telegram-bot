@@ -153,11 +153,19 @@ def help_command(message):
 )
 def receive_url(message):
 
+    if not is_user_joined(message.from_user.id):
+        bot.reply_to(
+            message,
+            "📢 Please join @under100rploot first to use this bot."
+        )
+        return
+
     url = message.text.strip()
 
     # Save URL for this user
     user_urls[message.from_user.id] = url
 
+    # ...rest of your existing code...
     markup = types.InlineKeyboardMarkup()
 
     sound_button = types.InlineKeyboardButton(
